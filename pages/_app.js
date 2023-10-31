@@ -1,4 +1,4 @@
-import BusinessProvider from "@/context/business";
+import { BusinessProvider } from "@/context/business";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {

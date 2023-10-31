@@ -1,5 +1,5 @@
 import { BUSINESS_SEARCH_FIELDS, PAGE_LIMIT } from "@/constant";
-import React, { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
 const initialQueries = BUSINESS_SEARCH_FIELDS.reduce((prev, curr) => {
   return { ...prev, [curr.name]: "" };
@@ -7,7 +7,7 @@ const initialQueries = BUSINESS_SEARCH_FIELDS.reduce((prev, curr) => {
 
 const Context = createContext();
 
-export default function BusinessProvider({ children }) {
+export function BusinessProvider({ children }) {
   const [business, setBusiness] = useState({
     data: [],
     queries: initialQueries,

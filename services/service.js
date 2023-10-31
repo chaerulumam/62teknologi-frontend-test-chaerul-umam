@@ -16,7 +16,8 @@ const callApi = async ({ url, method = "GET", data, query }) => {
   console.log({ endpoint });
 
   const response = await fetch(endpoint, {
-    method: {
+    method,
+    headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${API_KEY}`,
     },

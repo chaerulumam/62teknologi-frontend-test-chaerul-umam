@@ -1,4 +1,4 @@
-const getQueryString = (query) => {
+const getQueryString = (queries) => {
   const keys = Object.keys(queries);
   return keys.reduce((prev, curr, id) => {
     let result = prev;
