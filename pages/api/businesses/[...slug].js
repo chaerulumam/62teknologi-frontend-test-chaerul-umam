@@ -1,9 +1,9 @@
-import { getBusinessReview } from "../../../services";
+import { getBusinessReview } from "@/services/service";
 
 export default async function handler(req, res) {
-    const {slug, ...queries} = req.body
-    const [id] = slug
-    const data = await getBusinessReview(id, queries)
+  const { slug, ...queries } = req.body;
+  const [id] = slug;
+  const data = await getBusinessReview(id, queries);
 
-    res.status(200).json({status: 200, data})
+  res.status(200).json({ status: 200, data });
 }
