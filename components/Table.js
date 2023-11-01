@@ -25,7 +25,7 @@ const Table = (props) => {
 
   const columnFilters = column.map((item, id) => {
     return (
-      <th key={`th-filter-${id}`} className="px-6 py-3">
+      <th key={`th-filter-${item.id}`} className="px-6 py-3">
         {item.enableFilter && (
           <input
             className="p-2 border rounded focus:outline-none focus:border-blue-300"
@@ -70,7 +70,7 @@ const Table = (props) => {
       </tr>
     );
 
-  let tableClassName = ["w-full"];
+  let tableClassName = ["w-full table-auto"];
   if (className) tableClassName.push(className);
 
   return (

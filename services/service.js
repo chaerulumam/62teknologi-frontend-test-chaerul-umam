@@ -3,7 +3,7 @@ import { getQueryString } from "@/utils/helper";
 const { URL_HOST, API_KEY } = process.env;
 
 const url = {
-  business: "business",
+  businesses: "businesses",
   searchBusiness: "businesses/search",
 };
 
@@ -37,7 +37,7 @@ const searchBusiness = async (query) => {
 
 const getBusinessById = async (id) => {
   const data = await callApi({
-    url: `${url.business}/${id}`,
+    url: `${url.businesses}/${id}`,
   });
 
   return data;
@@ -45,7 +45,7 @@ const getBusinessById = async (id) => {
 
 const getBusinessReview = async (id, queries) => {
   const data = await callApi({
-    url: `${url.business}/${id}/reviews?limit=${queries.limit}`,
+    url: `${url.businesses}/${id}/reviews?limit=${queries.limit}`,
   });
 
   return data;

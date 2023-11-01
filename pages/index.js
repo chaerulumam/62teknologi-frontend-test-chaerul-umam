@@ -1,4 +1,5 @@
 import PageLimit from "@/components/PageLimit";
+import Pagination from "@/components/Pagination";
 import Search from "@/components/Search";
 import Table from "@/components/Table";
 import {
@@ -9,6 +10,7 @@ import {
 import { useBusinessContext } from "@/context/business";
 import { getQueryString } from "@/utils/helper";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -109,34 +111,56 @@ export default function Home() {
     });
 
   return (
-    <main
-      className={`w-full h-full flex flex-col first-letter:content-center relative text-black font-nunito ${inter.className}`}
-    >
-      <div className="container mx-auto">
-        <h1>Helo</h1>
-        <div className="flex flex-row">
-          <Search
-            fields={BUSINESS_SEARCH_FIELDS}
-            queries={queries}
-            setQueries={setQueries}
-            onSearch={handleSearch}
-            onClear={handleClearSearch}
-          />
-          <PageLimit
-            options={PAGE_LIMIT_OPTIONS}
-            pageLimit={pageLimit}
-            onChange={handlePageLimitChange}
-          />
+    <>
+      <Head>
+        <title>Search Businesses</title>
+        <meta name="description" content="Search the business informations" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main
+        className={`w-full h-full flex flex-col first-letter:content-center relative text-black font-nunito ${inter.className}`}
+      >
+        <div className="container mx-auto">
+          <h1>Helo</h1>
+          <div className="flex flex-row">
+            <Search
+              fields={BUSINESS_SEARCH_FIELDS}
+              queries={queries}
+              setQueries={setQueries}
+              onSearch={handleSearch}
+              onClear={handleClearSearch}
+            />
+            <PageLimit
+              options={PAGE_LIMIT_OPTIONS}
+              pageLimit={pageLimit}
+              onChange={handlePageLimitChange}
+            />
+          </div>
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <div className="container mx-auto">
+            <Table
+              className="w-full border bg-gray-300 rounded shadow"
+              loading={loading}
+              error={error}
+              column={BUSINESS_COLUMNS}
+              data={businesses}
+            />
+            {data && data.length > 0 && (
+              <Pagination
+                className="mt-4"
+                currentPage={currentPage}
+                totalData={totalData}
+                pageNumberLimit={pageLimit}
+                onPrevClick={onPrevClick}
+                onNextClick={onNextClick}
+                onPageChange={onPageChange}
+              />
+            )}
+          </div>
         </div>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-        <Table
-          className="w-full border bg-white rounded shadow"
-          loading={loading}
-          error={error}
-          column={BUSINESS_COLUMNS}
-          data={businesses}
-        />
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
